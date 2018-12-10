@@ -27,7 +27,7 @@
                         </tr>
                     </thead>
                     
-                    {{--  <tbody>
+                     {{-- <tbody>
                     @foreach ($peoples as $people)
                             <tr>
                                 <td>{{ $people->name }}</td>
@@ -53,15 +53,16 @@
                 $('#tableSurvey').DataTable({
                     'serverSide': true,
                     'ajax': '{{ url('api/people') }}',
+                    'scrollY': 400,
                     'columns': [
-                        {data: 'name'},
-                        {data: 'lastname'},
-                        {data: 'age'},
-                        {data: 'gender'},
-                        {data: 'city_id'},
-                        {data: 'job_id'},
-                        {data: 'email'},
-                        {data: 'calification'},
+                        {data: 'name', 'searchable': false},
+                        {data: 'lastname', 'searchable': false},
+                        {data: 'age', 'searchable': false},
+                        {data: 'gender', 'searchable': false},
+                        {data: 'city_name', 'searchable': false},
+                        {data: 'job_name', 'searchable': false},
+                        {data: 'email', 'searchable': false},
+                        {data: 'calification', 'searchable': false},
                         {data: 'opinion'},
                     ]
                 });

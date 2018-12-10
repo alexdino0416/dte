@@ -12,6 +12,18 @@
 */
 
 Route::get('/', function () {
-    $peoples = App\People::all();
-    return view('welcome', compact('peoples'));
+    // $peoples = DB::table('people')
+    // ->join('cities', 'people.city_id', '=', 'cities.id')
+    // ->join('jobs', 'people.job_id', '=', 'jobs.id')
+    // ->select('people.*', 'cities.name as "city_name"', 'jobs.name as "job_name"')
+    // ->limit(100)
+    // ->get();
+    return view('welcome');
+});
+Route::get('/chart', function () {
+    // $calification = App\People::select('calification', DB::raw('count(calification) as valor'))
+    // ->groupBy('calification')
+    // ->orderBy('calification', 'ASC')
+    // ->get();
+    return view('chart');
 });
