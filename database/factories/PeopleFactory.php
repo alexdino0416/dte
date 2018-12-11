@@ -10,7 +10,7 @@ $factory->define(App\People::Class, function (Faker $faker) {
         'gender' => $faker->randomElement(['male', 'female']),
         'email' => $faker->unique()->safeEmail,
         'calification' => rand(1,5),
-        'job_id' => rand(1,63),
+        'job_id' => rand(1,10),
         'city_id' => rand(1,31),
         'opinion' => $faker->sentence(4)
     ];

@@ -21,9 +21,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/chart', function () {
-    // $calification = App\People::select('calification', DB::raw('count(calification) as valor'))
-    // ->groupBy('calification')
-    // ->orderBy('calification', 'ASC')
-    // ->get();
-    return view('chart');
+    $total = App\People::count();
+    return view('chart', compact('total'));
 });

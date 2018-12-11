@@ -31,9 +31,15 @@ Route::get('people', function() {
 });
 
 Route::get('chart', function () {
-    $calification = App\People::select('calification', DB::raw('count(calification) as valor'))
+    $calification = App\People::select('calification', DB::raw('count(calification) as value'))
     ->groupBy('calification')
     ->orderBy('calification', 'ASC')
     ->get();
     return $calification;
+});
+Route::get('gender', function () {
+    $gender = App\People::select('gender', DB::raw('count(gender) as value'))
+    ->groupBy('gender')
+    ->get();
+    return $gender;
 });

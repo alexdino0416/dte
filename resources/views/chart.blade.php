@@ -12,34 +12,86 @@
 
 <body>
     <div class="container">
+        <div class="btn-group text-center" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-secondary" onclick="genderChart()">Gender</button>
+            <button type="button" class="btn btn-secondary">Job</button>
+            <button type="button" class="btn btn-secondary">City</button>
+        </div>
         <canvas id="chart"></canvas>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
     <script>
+        var data = [];
+        var labels = [];
+        var ctx = $('#chart');
+        var total = {{ $total }}
         $(document).ready(function(){
-            var data = {};
+
             $.get('{{ url('api/chart') }}', function (response) {
-                console.log(response);
+                response.forEach(element => {
+                    labels.push(element.calification);
+                    data.push(element.value);
+                    
+                })
+                
+                var myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Metro Calification',
+                            data: data,
+                            backgroundColor: [
+                                'rgba(9, 199, 9, 0.50)'
+                            ]
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: total
+                                }
+                            }]
+                        }
+                    }
+                });
+
             });
             
-            var ctx = $('#chart');
-            var myChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: [1,2,3,4,5],
-                    datasets: [{
-                        label: 'Metro Calification',
-                        data: [
-                            
-                        ]
-                    }]
-                },
-                options: {
-
-                }
-            });
         });
+
+        function genderChart() {
+            labels = [];
+            data = [];
+            $.get('{{ url('api/gender') }}').done(function (response) {
+                response.forEach(element => {
+                    labels.push(element.gender);
+                    data.push(element.value);
+                    
+                })
+
+                myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Metro Calification by Gender',
+                            data: data,
+                            backgroundColor: [
+                                'rgba(9, 104, 199, 1)',
+                                'rgba(199, 9, 199, 1)'
+                            ],
+                            borderWidth: 5
+
+                        }],
+                    },
+                    option: {}
+                });
+            });
+        }
     </script>
 </body>
 
