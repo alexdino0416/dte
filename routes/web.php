@@ -11,16 +11,21 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/table', function () {
     // $peoples = DB::table('people')
     // ->join('cities', 'people.city_id', '=', 'cities.id')
     // ->join('jobs', 'people.job_id', '=', 'jobs.id')
     // ->select('people.*', 'cities.name as "city_name"', 'jobs.name as "job_name"')
     // ->limit(100)
     // ->get();
-    return view('welcome');
+    return view('table');
 });
-Route::get('/chart', function () {
+Route::get('/', function () {
     $total = App\People::count();
     return view('chart', compact('total'));
 });
+
+Route::resource('people', 'PeopleController');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

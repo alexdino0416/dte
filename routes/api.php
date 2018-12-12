@@ -38,8 +38,9 @@ Route::get('chart', function () {
     return $calification;
 });
 Route::get('gender', function () {
-    $gender = App\People::select('gender', DB::raw('count(gender) as value'))
-    ->groupBy('gender')
+    $gender = App\People::select('calification', 'gender', DB::raw('count(gender) as value'))
+    ->groupBy('calification','gender')
+    ->orderBy('calification', 'ASC')
     ->get();
     return $gender;
 });
