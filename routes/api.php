@@ -25,6 +25,7 @@ Route::get('people', function() {
             ->join('cities', 'people.city_id', '=', 'cities.id')
             ->join('jobs', 'people.job_id', '=', 'jobs.id')
             ->select('people.*', 'cities.name as city_name', 'jobs.name as job_name')
+            ->orderBy('id', 'DESC')
             ->get()
         )
         ->toJson();
